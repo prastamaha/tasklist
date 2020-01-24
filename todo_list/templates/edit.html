@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h4>Update Task</h4><br>
+    <form class="form-inline my-2 my-lg-0" method="POST">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="{{ item.item }}" value="{{ item.item }}" name='item'>
+        <input type="hidden" value="{{ item.status }}" name="status">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Update</button>
+        <a href="{% url 'home' %}"><button style="margin-left: 10px;" class="btn btn-outline-info my-2 my-sm-0" type="button">Back</button></a>
+    </form>
+   
+      
+{% endblock content %}

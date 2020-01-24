@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <p>{{ message }}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if db %}
+        <table class="table table-striped">
+            {% for thing in db %}
+                {% if thing.status %}
+                    <tr class="table" >
+                        <td class="complete">{{ thing.item }}</td>
+                        <td><center><a href="{% url 'unfinish' thing.id %}" ><button type="button" class="btn btn-warning">Unfinish</button></a></center></td>
+                        <td><center><a href="{% url 'edit' thing.id %}"><button type="button" class="btn btn-info">Edit</button></a></center></td>
+                        <td><center><a href="{% url 'delete' thing.id %}"><button type="button" class="btn btn-danger">Delete</button></a></center></td>
+                    </tr>
+                {% else %}
+                    <tr class="table">
+                        <td>{{ thing.item }}</td>
+                        <td><center><a href="{% url 'finish' thing.id %}"><button type="button" class="btn btn-success">Finish</button></a></center></td>
+                        <td><center><a href="{% url 'edit' thing.id %}"><button type="button" class="btn btn-info">Edit</button></a></center></td>
+                        <td><center><a href="{% url 'delete' thing.id %}"><button type="button" class="btn btn-danger">Delete</button></a></center></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock content %}
