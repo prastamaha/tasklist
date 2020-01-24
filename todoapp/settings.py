@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '8&cuyci3ua7pb=uvs4uevd(ruf5bk@9kxue1#%zm$y7b%m-t9h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['list-tugas.herokuapp.com']
 
 
 # Application definition
