@@ -22,13 +22,31 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">{{ user.username }}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+            {% endif %}
+
+            {% if user.username == 'prasta' %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+              </li>
+            {% endif %}
           </ul>
           <form class="form-inline my-2 my-lg-0" method="POST">
             {% csrf_token %}
-            <input class="form-control mr-sm-2" type="search" placeholder="Add task" aria-label="Search" name="item">
+            <input class="form-control mr-sm-2" type="text" placeholder="Add task" aria-label="Search" name="item" required>
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add to List</button>
           </form>
         </div>

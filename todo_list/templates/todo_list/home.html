@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'todo_list/base.html'%}
 
 {% block content %}
     
@@ -13,12 +13,16 @@
         {% endfor %}
     {% endif %}
 
+    {% if db_len == 0 %}
+        <p class="display-4 text-center">No Task :)</p>
+    {% endif %}
+
     {% if db %}
         <table class="table table-striped">
             {% for thing in db %}
                 {% if thing.status %}
                     <tr class="table" >
-                        <td class="complete">{{ thing.item }}</td>
+                        <td class="complete"><s>{{ thing.item }}</s></td>
                         <td><center><a href="{% url 'unfinish' thing.id %}" ><button type="button" class="btn btn-warning">Unfinish</button></a></center></td>
                         <td><center><a href="{% url 'edit' thing.id %}"><button type="button" class="btn btn-info">Edit</button></a></center></td>
                         <td><center><a href="{% url 'delete' thing.id %}"><button type="button" class="btn btn-danger">Delete</button></a></center></td>

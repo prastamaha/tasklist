@@ -1,0 +1,30 @@
+{% extends 'todo_list/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    <div class="span3 well">
+        <center>
+        <img class="rounded-circle" src="{{ user.profile.image.url }}" name="aboutme" width="140" height="140" class="img-circle">
+        <hr>
+        <h3 class="h3">{{ user.username }}</h3>
+        <p>{{ user.email }}</p>
+		</center>
+    </div>
+    <div>
+        <hr>
+        <p style="text-align: center;">Update</p>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+            <small class="text-muted">
+                Your image will be compressed become 300x300 px
+              </small><br><br>
+            <button type="submit" class="btn btn-primary mb-2">Update</button>
+          </form>
+    </div>
+</div>
+
+{% endblock content %}
